@@ -7,6 +7,8 @@ on:
 jobs:
   process-issue:
     runs-on: ubuntu-latest
+    env:
+      APP_SECRET: ${{ secrets.API_KEY }}
     steps:
       - name: Echo Issue Title
         run: |
@@ -18,6 +20,10 @@ jobs:
           echo "Issue title is: $TITLE"
           echo "Running title-specific action:"
           $TITLE
+
+      - name: Use My Secret
+        run: |
+          echo "Checking if the secret is valid: $APP_SECRET"
 
       - name: Respond to Issue
         uses: actions/github-script@v6
