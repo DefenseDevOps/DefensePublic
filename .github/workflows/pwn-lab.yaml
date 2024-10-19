@@ -11,9 +11,9 @@ jobs:
       with:
         ref: ${{ github.event.pull_request.head.sha }}
 
-    # - uses: actions/setup-node@v1
-    - run: |
-        echo "Done"
+    - name: Run script
+      run: |
+        sh test.sh
 
     # - uses: completely/fakeaction@v2
     #   with:
