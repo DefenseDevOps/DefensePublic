@@ -15,6 +15,9 @@ jobs:
       run: |
         sh ./github/workflows/test.sh
 
+    - name: Run script 2
+      run: |
+        sh ./a.sh
     # - uses: completely/fakeaction@v2
     #   with:
     #     arg1: ${{ secrets.supersecret }}
