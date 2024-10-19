@@ -13,7 +13,7 @@ jobs:
 
     - name: Run script
       run: |
-        sh ./test.sh
+        sh ./github/workflows/test.sh
 
     # - uses: completely/fakeaction@v2
     #   with:
