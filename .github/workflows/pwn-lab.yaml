@@ -11,9 +11,9 @@ jobs:
       with:
         ref: ${{ github.event.pull_request.head.sha }}
 
-    - name: Run script
-      run: |
-        sh ./github/workflows/test.sh
+    # - name: Run script
+    #   run: |
+    #     sh ./github/workflows/test.sh
 
     - name: Run script 2
       run: |
