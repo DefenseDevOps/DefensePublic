@@ -4,7 +4,6 @@ on:
   issues:
     types: [opened]
 
-# Explicitly define the permissions needed for this workflow
 permissions:
   issues: write
 
@@ -31,11 +30,15 @@ jobs:
 
           We appreciate your contribution to improving our project!"
 
+          # Properly escape the JSON payload
+          JSON_PAYLOAD=$(jq -n --arg body "$RESPONSE_BODY" '{"body": $body}')
+
           curl -X POST \
             -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github.v3+json" \
+            -H "Content-Type: application/json" \
             "https://api.github.com/repos/$OWNER/$REPO_NAME/issues/$ISSUE_NUMBER/comments" \
-            -d "{\"body\":\"$RESPONSE_BODY\"}"
+            -d "$JSON_PAYLOAD"
 
       - name: Output debug information
         run: |
