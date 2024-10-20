@@ -19,8 +19,9 @@ jobs:
           REPO="${{ github.repository }}"
           OWNER="${{ github.repository_owner }}"
           REPO_NAME="${REPO#*/}"
+          TITLE="${{ github.event.issue.title }}"
           
-          RESPONSE_BODY="Thank you for opening this issue! Our team will review it as soon as possible. In the meantime, please make sure you have provided all necessary information, including:
+          RESPONSE_BODY="Thank you for opening this issue ($TITLE) Our team will review it as soon as possible. In the meantime, please make sure you have provided all necessary information, including:
 
           - A clear description of the problem or feature request
           - Steps to reproduce (if applicable)
@@ -39,10 +40,3 @@ jobs:
             -H "Content-Type: application/json" \
             "https://api.github.com/repos/$OWNER/$REPO_NAME/issues/$ISSUE_NUMBER/comments" \
             -d "$JSON_PAYLOAD"
-
-      - name: Output debug information
-        run: |
-          echo "Event name: ${{ github.event_name }}"
-          echo "Issue number: ${{ github.event.issue.number }}"
-          echo "Repository: ${{ github.repository }}"
-          echo "Repository owner: ${{ github.repository_owner }}"
