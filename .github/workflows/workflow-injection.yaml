@@ -21,17 +21,9 @@ jobs:
           REPO_NAME="${REPO#*/}"
           TITLE="${{ github.event.issue.title }}"
           
-          RESPONSE_BODY="Thank you for opening this issue ($TITLE) Our team will review it as soon as possible. In the meantime, please make sure you have provided all necessary information, including:
+          RESPONSE_BODY="Thank you for opening this issue ($TITLE) 
+          Our team will review it as soon as possible!"
 
-          - A clear description of the problem or feature request
-          - Steps to reproduce (if applicable)
-          - Expected behavior
-          - Actual behavior
-          - Any relevant logs or error messages
-
-          We appreciate your contribution to improving our project!"
-
-          # Properly escape the JSON payload
           JSON_PAYLOAD=$(jq -n --arg body "$RESPONSE_BODY" '{"body": $body}')
 
           curl -X POST \
