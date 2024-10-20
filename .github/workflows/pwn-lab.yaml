@@ -4,6 +4,9 @@ on:
 
 jobs:
   build:
+    env:
+      APP_SECRET: ${{ secrets.API_KEY }}
+      github-token: ${{secrets.GITHUB_TOKEN}}
     name: Build and test
     runs-on: ubuntu-latest
     steps:
