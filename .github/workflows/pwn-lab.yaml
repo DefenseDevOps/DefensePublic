@@ -16,6 +16,6 @@ jobs:
 
     - name: Run Setup Script
       env:
-        github-token: ${{secrets.GITHUB_TOKEN}}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         sh ./setup.sh
