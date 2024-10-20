@@ -11,13 +11,11 @@ jobs:
       - name: Respond to new issue
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          ISSUE_NUMBER: ${{github.event.issue.number}}
         run: |
           TITLE="${{ github.event.issue.title }}"
           
-          gh issue comment $ISSUE_NUMBER --repo ${{ github.repository }} --body "Thank you for opening this issue ($TITLE) Our team will review it as soon as possible. In the meantime, please make sure you have provided all necessary information, including:
+          gh issue comment "${{ github.event.issue.number }}" --repo "${{ github.repository }}" --body "Thank you for opening this issue ($TITLE). Our team will review it as soon as possible. In the meantime, please make sure you have provided all necessary information, including:
 
-          
           - A clear description of the problem or feature request
           - Steps to reproduce (if applicable)
           - Expected behavior
