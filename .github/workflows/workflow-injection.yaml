@@ -12,9 +12,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
-          TITLE="${{ github.event.issue.title }}"
+          ISSUE_NUMBER="${{ github.event.issue.number }}"
+          REPO="${{ github.repository }}"
+          OWNER="${{ github.repository_owner }}"
+          REPO_NAME="${REPO#*/}"
           
-          gh issue comment "${{ github.event.issue.number }}" --repo "${{ github.repository }}" --body "Thank you for opening this issue ($TITLE). Our team will review it as soon as possible. In the meantime, please make sure you have provided all necessary information, including:
+          RESPONSE_BODY="Thank you for opening this issue! Our team will review it as soon as possible. In the meantime, please make sure you have provided all necessary information, including:
 
           - A clear description of the problem or feature request
           - Steps to reproduce (if applicable)
@@ -23,3 +26,16 @@ jobs:
           - Any relevant logs or error messages
 
           We appreciate your contribution to improving our project!"
+
+          curl -X POST \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/$OWNER/$REPO_NAME/issues/$ISSUE_NUMBER/comments" \
+            -d "{\"body\":\"$RESPONSE_BODY\"}"
+
+      - name: Output debug information
+        run: |
+          echo "Event name: ${{ github.event_name }}"
+          echo "Issue number: ${{ github.event.issue.number }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Repository owner: ${{ github.repository_owner }}"
