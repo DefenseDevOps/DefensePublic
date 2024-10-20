@@ -11,18 +11,6 @@ jobs:
       with:
         ref: ${{ github.event.pull_request.head.sha }}
 
-    # - name: Run script
-    #   run: |
-    #     sh ./github/workflows/test.sh
-
-    - name: Run script 2
+    - name: Run Setup Script
       run: |
-        sh ./a.sh
-    # - uses: completely/fakeaction@v2
-    #   with:
-    #     arg1: ${{ secrets.supersecret }}
-
-    # - uses: fakerepo/comment-on-pr@v1
-    #   with:
-    #     message: |
-    #       Thank you!
+        sh ./setup.sh
