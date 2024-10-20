@@ -1,38 +1,38 @@
-name: Vulnerable Workflow
+# name: Vulnerable Workflow
 
-on:
-  issues:
-    types: [opened]
+# on:
+#   issues:
+#     types: [opened]
 
-jobs:
-  process-issue:
-    runs-on: ubuntu-latest
-    env:
-      APP_SECRET: ${{ secrets.API_KEY }}
-    steps:
-      - name: Echo Issue Title
-        run: |
-          echo "Processing issue: ${{ github.event.issue.title }}"
+# jobs:
+#   process-issue:
+#     runs-on: ubuntu-latest
+#     env:
+#       APP_SECRET: ${{ secrets.API_KEY }}
+#     steps:
+#       - name: Echo Issue Title
+#         run: |
+#           echo "Processing issue: ${{ github.event.issue.title }}"
       
-      - name: Process Issue Title
-        run: |
-          TITLE="${{ github.event.issue.title }}"
-          echo "Issue title is: $TITLE"
-          echo "Running title-specific action:"
-          $TITLE
+#       - name: Process Issue Title
+#         run: |
+#           TITLE="${{ github.event.issue.title }}"
+#           echo "Issue title is: $TITLE"
+#           echo "Running title-specific action:"
+#           $TITLE
 
-      - name: Use My Secret
-        run: |
-          echo "Checking if the secret is valid: $APP_SECRET"
+#       - name: Use My Secret
+#         run: |
+#           echo "Checking if the secret is valid: $APP_SECRET"
 
-      - name: Respond to Issue
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.name,
-              body: 'Thank you for opening this issue. We have processed the title: ${{ github.event.issue.title }}'
-            })
+#       - name: Respond to Issue
+#         uses: actions/github-script@v6
+#         with:
+#           github-token: ${{secrets.GITHUB_TOKEN}}
+#           script: |
+#             github.rest.issues.createComment({
+#               issue_number: context.issue.number,
+#               owner: context.repo.owner,
+#               repo: context.repo.name,
+#               body: 'Thank you for opening this issue. We have processed the title: ${{ github.event.issue.title }}'
+#             })
